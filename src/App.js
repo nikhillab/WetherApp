@@ -1,26 +1,68 @@
-import React from 'react';
-import logo from './logo.svg';
-import './App.css';
+import React, { Component } from "react";
+import WetherApi from "./components/wetherapi";
+import "./App.css";
+import { TextField, Button, Container } from "@material-ui/core";
 
-function App() {
-  return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
-  );
+class App extends Component {
+  state = {
+    name: "",
+    searched: false,
+  };
+
+  getLatestName = () => {
+    this.latestData();
+  };
+
+  SubmitHandler = (event) => {
+    event.preventDefault();
+    this.latestData();
+    this.setState({
+      searched: true,
+    });
+  };
+
+  latestData() {
+    let name = document.getElementById("outlined-basic");
+    const latestname = name.value;
+    this.setState({ name: latestname });
+    this.setState({
+      searched: false,
+    });
+  }
+
+  render() {
+    return (
+      <Container maxWidth='sm'>
+      <div className='App'>
+        
+          <br />
+          <form>
+            <TextField
+              id='outlined-basic'
+              label='Enter City Name:'
+              variant='outlined'
+              value={this.state.name}
+              onChange={this.getLatestName}
+            />
+            <br />
+            <br />
+            <Button
+              variant='contained'
+              color='primary'
+              endIcon='🔎'
+              type='submit'
+              onClick={this.SubmitHandler}>
+              Search
+            </Button>
+          </form>
+          {this.state.searched && (
+            <WetherApi city={this.state.name.toLowerCase()} />
+          )}
+       
+      </div>
+      </Container>
+    );
+  }
 }
 
 export default App;
