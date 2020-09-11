@@ -1,6 +1,6 @@
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
 ## For Live Demo
-Visit[WetherApp](https://nikhillab.github.io/WetherApp/).
+Visit [WetherApp](https://nikhillab.github.io/WetherApp/).
 
 ## Available Scripts
 
